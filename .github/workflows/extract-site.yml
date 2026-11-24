@@ -1,0 +1,33 @@
+name: Extract site zip
+on:
+  push:
+    paths:
+      - faizan-ahsan-3d-portfolio.zip
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unzip site files
+        run: |
+          mkdir -p extracted
+          unzip -o faizan-ahsan-3d-portfolio.zip -d extracted
+          if [ ! -f extracted/index.html ]; then
+            sub=$(find extracted -mindepth 1 -maxdepth 1 -type d | head -n 1)
+            if [ -n "$sub" ]; then mv "$sub"/* extracted/; rmdir "$sub"; fi
+          fi
+          shopt -s dotglob
+          mv extracted/* .
+          rmdir extracted
+          rm -f faizan-ahsan-3d-portfolio.zip
+          ls -la
+      - name: Commit extracted files
+        run: |
+          git config user.name "faizanahsan130-web"
+          git config user.email "faizanahsan130@gmail.com"
+          git add -A
+          git commit -m "Extract portfolio site files from zip" || echo "nothing to commit"
+          git push
