@@ -24,3 +24,41 @@
 
 /* Keep the CV action unavailable until the real PDF has been supplied. */
 #cvLink.cv-missing{display:none}
+
+/* Chatbot widget */
+.chat-fab{position:fixed;z-index:60;right:22px;bottom:84px;width:54px;height:54px;border-radius:50%;border:0;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--violet));color:#fff;cursor:pointer;box-shadow:0 10px 30px rgba(255,122,54,.35);transition:transform .2s}
+.chat-fab:hover{transform:translateY(-3px) scale(1.04)}
+.chat-fab svg{width:26px;height:26px}
+.chat-fab-dot{position:absolute;top:2px;right:2px;width:12px;height:12px;border-radius:50%;background:#46d69a;border:2px solid var(--bg)}
+.chat-panel{position:fixed;z-index:61;right:22px;bottom:150px;width:min(360px,calc(100vw - 32px));height:min(500px,calc(100vh - 180px));min-height:380px;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:20px;background:var(--panel);backdrop-filter:blur(18px);box-shadow:var(--shadow);overflow:hidden;opacity:0;visibility:hidden;transform:translateY(12px) scale(.98);transition:opacity .25s,transform .25s,visibility .25s}
+.chat-panel.open{opacity:1;visibility:visible;transform:none}
+.chat-header{display:flex;align-items:center;gap:11px;padding:14px 16px;background:linear-gradient(120deg,rgba(255,122,54,.16),rgba(139,124,255,.16));border-bottom:1px solid var(--line)}
+.chat-avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--violet));color:#fff;font:700 15px var(--display);flex:none}
+.chat-header-text{flex:1;min-width:0}
+.chat-header-text strong{display:block;font:600 14px var(--display)}
+.chat-header-text span{font-size:11px;color:var(--muted)}
+.chat-status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#46d69a;margin-right:4px}
+.chat-close{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--text);cursor:pointer;font-size:15px;line-height:1;flex:none}
+.chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.chat-msg{max-width:85%;padding:10px 13px;border-radius:14px;font-size:13px;line-height:1.55;white-space:pre-wrap;word-break:break-word}
+.chat-msg.bot{align-self:flex-start;background:var(--panel-solid);border:1px solid var(--line);border-bottom-left-radius:4px}
+.chat-msg.user{align-self:flex-end;background:linear-gradient(120deg,var(--accent),var(--accent2));color:#1a0d08;border-bottom-right-radius:4px}
+.chat-msg a{color:var(--accent2);text-decoration:underline}
+.chat-msg.user a{color:#1a0d08}
+.chat-typing{display:inline-flex;gap:4px;padding:12px 14px}
+.chat-typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:chatblink 1s infinite}
+.chat-typing i:nth-child(2){animation-delay:.2s}
+.chat-typing i:nth-child(3){animation-delay:.4s}
+@keyframes chatblink{50%{opacity:.3}}
+.chat-chips{display:flex;gap:7px;flex-wrap:wrap;padding:0 16px 10px}
+.chat-chip{padding:7px 11px;border:1px solid var(--line);border-radius:30px;background:transparent;color:var(--muted);font-size:11px;cursor:pointer;transition:.2s}
+.chat-chip:hover{background:var(--accent);border-color:var(--accent);color:#1c0d06}
+.chat-input-row{display:flex;gap:9px;padding:12px 14px;border-top:1px solid var(--line)}
+.chat-input{flex:1;min-width:0;border:1px solid var(--line);border-radius:999px;padding:10px 14px;background:color-mix(in srgb,var(--bg) 80%,transparent);color:var(--text);font-size:13px;outline:none}
+.chat-input:focus{border-color:var(--accent)}
+.chat-send{width:42px;height:42px;border-radius:50%;border:0;background:linear-gradient(120deg,var(--accent),var(--accent2));color:#1a0d08;font-size:17px;cursor:pointer;flex:none}
+.chat-handoff{display:flex;gap:8px;padding:0 14px 13px}
+.chat-handoff a{flex:1;text-align:center;padding:8px 6px;border:1px solid var(--line);border-radius:10px;font-size:11px;font-weight:700;color:var(--muted)}
+.chat-handoff a:hover{color:var(--accent2);border-color:var(--accent)}
+@media(max-width:560px){.chat-fab{right:15px;bottom:73px;width:50px;height:50px}.chat-panel{right:16px;left:16px;width:auto;bottom:133px;height:min(520px,68vh)}}
+@media(prefers-reduced-motion:reduce){.chat-panel,.chat-fab{transition:none}.chat-typing i{animation:none}}
